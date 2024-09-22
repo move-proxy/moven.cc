@@ -1,54 +1,124 @@
-// Modal functionality
-const modal = document.getElementById("loginModal");
-const span = document.getElementsByClassName("close")[0];
-const mainContent = document.getElementById("mainContent"); // Reference to main content
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Showcasing the latest fashion trends from Flacko.">
+    <title>Flacko Clothing Brand</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
 
-// Close modal when the user clicks on <span> (x)
-span.onclick = function() {
-    closeModal();
-};
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
 
-// Close modal when the user clicks anywhere outside of the modal
-window.onclick = function(event) {
-    if (event.target === modal) {
-        closeModal();
-    }
-};
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Main Content (initially hidden) -->
+    <div id="mainContent" style="display: none;">
+        <header>
+            <div class="container">
+                <h1>Welcome to Flacko Clothing Brand</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#collection">Collection</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
+        <section id="hero">
+            <div class="container">
+                <h2>Discover the Latest Styles</h2>
+                <p>Elevate your wardrobe with Flacko's unique designs.</p>
+                <button onclick="scrollToSection('#collection')">Shop Now</button>
+            </div>
+        </section>
 
-const validUsername = atob('bW92ZQ=='); 
-const validPassword = atob('aWxvdmV3ZWVkQDEyMw=='); 
+        <section id="about">
+            <div class="container">
+                <h2>About Flacko</h2>
+                <p>
+                    Flacko is a clothing brand that embodies style, comfort, and individuality. Our mission is to provide high-quality fashion that allows everyone to express themselves.
+                </p>
+            </div>
+        </section>
 
-// Handle login form submission
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent form from reloading the page
+        <section id="collection">
+            <div class="container">
+                <h2>Our Collection</h2>
+                <div class="collection-grid">
+                    <div class="collection-item">
+                        <img src="shirt.jpg" alt="Stylish Shirt">
+                        <h3>Stylish Shirt</h3>
+                        <p>$29.99</p>
+                    </div>
+                    <div class="collection-item">
+                        <img src="pants.jpg" alt="Comfortable Pants">
+                        <h3>Comfortable Pants</h3>
+                        <p>$49.99</p>
+                    </div>
+                    <div class="collection-item">
+                        <img src="jacket.jpg" alt="Trendy Jacket">
+                        <h3>Trendy Jacket</h3>
+                        <p>$89.99</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
+        <section id="gallery">
+            <div class="container">
+                <h2>Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="fashion1.jpg" alt="Fashion Showcase">
+                        <p>Latest collection photoshoot.</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="fashion2.jpg" alt="Fashion Event">
+                        <p>Flacko at the Fashion Show.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    // Check credentials (case-sensitive)
-    if (username === validUsername && password === validPassword) {
-        alert('Login successful!');
-        closeModal(); // Hide modal
-        mainContent.style.display = 'block'; // Show the main content
-    } else {
-        alert('Invalid username or password!');
-    }
-});
+        <section id="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <form id="contactForm" action="https://formspree.io/f/xkgwlobb" method="POST">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
 
-// Function to open the modal and hide main content
-function openModal() {
-    modal.style.display = "block"; // Show modal
-    mainContent.style.display = "none"; // Hide main content
-}
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" required></textarea>
 
-// Function to close the modal and show main content
-function closeModal() {
-    modal.style.display = "none"; // Hide modal
-    mainContent.style.display = "block"; // Show main content
-}
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
 
-// Show the login modal on page load
-window.onload = function() {
-    openModal(); // Show modal when the page loads
-};
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Flacko Clothing Brand. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
