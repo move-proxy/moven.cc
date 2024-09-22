@@ -5,17 +5,17 @@ const mainContent = document.getElementById("mainContent"); // Reference to main
 
 // Close modal when the user clicks on <span> (x)
 span.onclick = function() {
-    modal.style.display = "none";
+    closeModal();
 };
 
 // Close modal when the user clicks anywhere outside of the modal
 window.onclick = function(event) {
     if (event.target === modal) {
-        modal.style.display = "none";
+        closeModal();
     }
 };
 
-// Use Base64 to obfuscate valid credentials
+
 const validUsername = atob('bW92ZQ=='); 
 const validPassword = atob('aWxvdmV3ZWVkQDEyMw=='); 
 
@@ -26,19 +26,29 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
 
-
-    
     // Check credentials (case-sensitive)
     if (username === validUsername && password === validPassword) {
         alert('Login successful!');
-        modal.style.display = 'none'; // Hide modal
+        closeModal(); // Hide modal
         mainContent.style.display = 'block'; // Show the main content
     } else {
         alert('Invalid username or password!');
     }
 });
 
+// Function to open the modal and hide main content
+function openModal() {
+    modal.style.display = "block"; // Show modal
+    mainContent.style.display = "none"; // Hide main content
+}
+
+// Function to close the modal and show main content
+function closeModal() {
+    modal.style.display = "none"; // Hide modal
+    mainContent.style.display = "block"; // Show main content
+}
+
 // Show the login modal on page load
 window.onload = function() {
-    modal.style.display = "block"; // Show modal when the page loads
+    openModal(); // Show modal when the page loads
 };
