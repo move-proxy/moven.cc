@@ -31,20 +31,24 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
 
-    // Send login data to the serverless function
-    const response = await fetch('/.netlify/functions/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
+    try {
+        const response = await fetch('/.netlify/functions/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+        });
 
-    const result = await response.json();
+        const result = await response.json();
 
-    if (response.status === 200) {
-        alert(result.message);
-        closeModal(); // Hide modal
-    } else {
-        alert(result.message); // Display the error message
+        if (response.status === 200) {
+            alert(result.message);
+            closeModal(); // Hide modal
+        } else {
+            alert(result.message); // Display the error message
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
     }
 });
 
