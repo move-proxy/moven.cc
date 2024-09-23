@@ -1,4 +1,3 @@
-// Modal functionality
 const modal = document.getElementById("loginModal");
 const span = document.getElementsByClassName("close")[0];
 const mainContent = document.getElementById("mainContent"); // Reference to main content
@@ -25,23 +24,27 @@ window.onclick = function(event) {
     }
 };
 
-// Use Base64 to obfuscate valid credentials
-const validUsername = atob('bW92ZQ=='); 
-const validPassword = atob('aWxvdmV3ZWVkQDEyMw=='); 
-
 // Handle login form submission
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault(); // Prevent form from reloading the page
 
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
 
-    // Check credentials (case-sensitive)
-    if (username === validUsername && password === validPassword) {
-        alert('Login successful!');
+    // Send login data to the serverless function
+    const response = await fetch('/.netlify/functions/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+
+    const result = await response.json();
+
+    if (response.status === 200) {
+        alert(result.message);
         closeModal(); // Hide modal
     } else {
-        alert('Invalid username or password!');
+        alert(result.message); // Display the error message
     }
 });
 
