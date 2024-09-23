@@ -1,32 +1,27 @@
 const modal = document.getElementById("loginModal");
 const span = document.getElementsByClassName("close")[0];
-const mainContent = document.getElementById("mainContent"); // Reference to main content
+const mainContent = document.getElementById("mainContent"); 
 
-// Function to open the modal and hide main content
 function openModal() {
-    modal.style.display = "block"; // Show modal
-    mainContent.style.display = "none"; // Hide main content
+    modal.style.display = "block"; 
+    mainContent.style.display = "none"; 
 }
 
-// Function to close the modal and show main content
 function closeModal() {
-    modal.style.display = "none"; // Hide modal
-    mainContent.style.display = "block"; // Show main content
+    modal.style.display = "none"; 
+    mainContent.style.display = "block"; 
 }
 
-// Close modal when the user clicks on <span> (x)
 span.onclick = closeModal;
 
-// Close modal when the user clicks anywhere outside of the modal
 window.onclick = function(event) {
     if (event.target === modal) {
         closeModal();
     }
 };
 
-// Handle login form submission
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent form from reloading the page
+    e.preventDefault(); 
 
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -42,9 +37,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.status === 200) {
             alert(result.message);
-            closeModal(); // Hide modal
+            closeModal(); 
         } else {
-            alert(result.message); // Display the error message
+            alert(result.message); 
         }
     } catch (error) {
         console.error('Error:', error);
@@ -52,7 +47,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 });
 
-// Show the login modal on page load
+
 window.onload = function() {
-    openModal(); // Show modal when the page loads
+    openModal(); 
 };
